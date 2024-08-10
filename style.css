@@ -103,3 +103,24 @@ a {
         font-size: 1.2em;
     }
 }
+
+
+@media (min-width: 120rem) {
+    header > h1 {
+        font-size: 3.6em;
+    }
+
+    header > img {
+        width: 38em;
+        height: 38em;
+    }
+    
+    a {
+        font-size: 3em;
+    }
+    ul > li {
+        padding: 4em;
+        margin: 1.8em auto;
+        max-width: 980px;
+    }
+}

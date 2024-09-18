@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <title>Shaki's profile - Links</title>
+    <title>Shimizu's profile - Links</title>
 </head>
 <body>
     <div id="particles-js"></div>
     <div class="main">
         <header>
-            <img src="./assets/img/shaki_pfp.png" alt="">
-            <h1>@Shaki</h1>
+            <img src="./assets/img/Shimizu_pfp.jpg" alt="">
+            <h1>@Shimizu</h1>
         </header>
         <ul>
             <li>
-                <a href="https://x.com/Shaki_Koi">
+                <a href="https://x.com/LazyShimizu">
                     <img src="./assets/img/x-logo.svg" alt="X">
                     Twitter
                 </a>
@@ -28,19 +28,13 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.youtube.com/@Shaki.Oji-san">
+                <a href="https://www.youtube.com/@Shimizu.lazy-dev">
                     <img src="./assets/img/youtube.svg" alt="Youtube">
                     Youtube
                 </a>
             </li>
             <li>
-                <a href="https://www.facebook.com/shaki.lazy">
-                    <img src="./assets/img/facebook.svg" alt="Facebook">
-                    Facebook
-                </a>
-            </li>
-            <li>
-                <a href="https://t.me/shakilazy">
+                <a href="https://t.me/honokalazy">
                     <img src="./assets/img/telegram.svg" alt="Telegram">
                     Telegram
                 </a>
@@ -66,6 +60,11 @@
         main.style.opacity = 1
         main.style.filter = 'blur(0)'
     }, 1000)
+
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('contextmenu', e => e.preventDefault());
+        img.addEventListener('dragstart', e => e.preventDefault())
+    })
     
 </script>
 

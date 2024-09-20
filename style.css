@@ -34,7 +34,7 @@ header {
     align-items: center;
 }
 
-header > img {
+header > .pfp-info > img {
     width: 14em;
     height: 14em;
     border-radius: 100%;
@@ -42,6 +42,64 @@ header > img {
     box-shadow: rgb(28 32 93 / 28%) 0px 2px 8px 0px;
     position: relative;
 }
+
+#dot {
+    display: inline-block;
+    margin-right: .1em;
+    border-radius: 50%;
+    width: .6em;
+    height: .6em;
+}
+
+
+.pfp-info {
+    position: relative;
+}
+
+.meta{
+    position: absolute;
+    bottom: 8px;
+    left: 10.2em;
+}
+
+
+#dot {
+    display:block;
+    margin-right: .1em;
+    border-radius: 50%;
+    width: 1.4em;
+    height: 1.4em;
+    flex-shrink: 0;
+}
+
+.discord {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5em .46em;
+    border-radius: 20px;
+    box-sizing: border-box;
+    transition: padding 0.3s ease;
+    
+}
+
+#status {
+    transition: max-width 0.56s ease, opacity 0.56s ease-in, margin-left 0.56s ease-in, padding-right 0.56s ease-in;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+.discord:hover #status {
+    max-width: 100px;
+    opacity: 1;
+    margin-left: .2em;
+    padding-right: .30rem;
+}
+
 
 header > h1 {
     display: inline-block;
@@ -58,7 +116,7 @@ ul {
     box-sizing: border-box;
     list-style: none;
     margin: 0 auto;
-    padding: 0.8em 2em 2em 2em;
+    padding: 0.8em 2em 0.6em 0.4em;
 }
 
 ul > li {
@@ -88,6 +146,8 @@ a {
     font-size: 1.23em;
 }
 
+
+
 /* Some reponsive */
 @media (max-width: 45rem) {
     header > h1 {
@@ -101,8 +161,12 @@ a {
     
     a {
         font-size: 1.2em;
-    }
+    } 
 }
+
+
+
+
 
 
 @media (min-width: 120rem) {
@@ -123,6 +187,7 @@ a {
         margin: 1.8em auto;
         max-width: 980px;
     }
+    
 }
 
 

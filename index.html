@@ -11,37 +11,46 @@
     <div id="particles-js"></div>
     <div class="main">
         <header>
-            <img src="./assets/img/Shimizu_pfp.jpg" alt="">
+            <div class="pfp-info">
+                <img src="./assets/img/Shimizu_pfp.jpg" alt="">
+                <div class="meta">
+                    <div class="discord">
+                        <span id="dot"></span>
+                        <span id="status" class="hidden-status"></span>
+                    </div>
+                </div>
+            </div>
             <h1>@Shimizu</h1>
+           
         </header>
         <ul>
             <li>
                 <a href="https://x.com/LazyShimizu">
-                    <img src="./assets/img/x-logo.svg" alt="X">
+                    <img src="./assets/img/x-logo.svg" alt="X" >
                     Twitter
                 </a>
             </li>
             <li>
                 <a href="https://www.pixiv.net/en/users/40451129">
-                    <img src="./assets/img/pixiv.svg" alt="Pixiv">
+                    <img src="./assets/img/pixiv.svg" alt="Pixiv" >
                     Pixiv
                 </a>
             </li>
             <li>
                 <a href="https://www.youtube.com/@Shimizu.dev-lazy">
-                    <img src="./assets/img/youtube.svg" alt="Youtube">
+                    <img src="./assets/img/youtube.svg" alt="Youtube" >
                     Youtube
                 </a>
             </li>
             <li>
                 <a href="https://t.me/honokalazy">
-                    <img src="./assets/img/telegram.svg" alt="Telegram">
+                    <img src="./assets/img/telegram.svg" alt="Telegram" >
                     Telegram
                 </a>
             </li>
             <li>
                 <a href="https://discordapp.com/users/684965357609549842">
-                    <img src="./assets/img/discord.svg" alt="Discord">
+                    <img src="./assets/img/discord.svg" alt="Discord" >
                     Discord
                 </a>
             </li>
@@ -54,19 +63,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 <script src="./assets/particles/particles.js"></script>
 <script src="./assets/particles/app.js"></script>
-<script>
-    setTimeout(() => {
-        const main = document.querySelector('.main')
-        main.style.opacity = 1
-        main.style.filter = 'blur(0)'
-    }, 1000)
 
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('contextmenu', e => e.preventDefault());
-        img.addEventListener('dragstart', e => e.preventDefault())
-    })
-    
-</script>
+
+<script src="./main.js"></script>
 
 
 </body>

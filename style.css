@@ -85,7 +85,7 @@ header > .pfp-info > img {
 }
 
 #status {
-    transition: max-width 0.56s ease, opacity 0.56s ease-in, margin-left 0.56s ease-in, padding-right 0.56s ease-in;
+    transition: max-width 0.4s ease, opacity 0.4s ease, margin-left 0.4s ease, padding-right 0.4s ease;
     max-width: 0;
     opacity: 0;
     overflow: hidden;

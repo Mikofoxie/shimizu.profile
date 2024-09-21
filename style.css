@@ -90,6 +90,7 @@ header > .pfp-info > img {
     opacity: 0;
     overflow: hidden;
     white-space: nowrap;
+    cursor: default;
 }
 
 

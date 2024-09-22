@@ -77,7 +77,7 @@ header > .pfp-info > img {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 0.5em .46em;
+    padding: .5em .36em .5em .46em;
     border-radius: 20px;
     box-sizing: border-box;
     transition: padding 0.3s ease;

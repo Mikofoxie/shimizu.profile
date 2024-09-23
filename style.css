@@ -95,7 +95,7 @@ header > .pfp-info > img {
 
 
 .discord:hover #status {
-    max-width: 100px;
+    max-width: 220px;
     opacity: 1;
     margin-left: .2em;
     padding-right: .30rem;

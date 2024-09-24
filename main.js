@@ -88,7 +88,7 @@ function updateElementStyle(selector, property, value) {
 }
 
 function capitalizeFirstLetter(str) {
-    if (str.toLowerCase() === 'dnd') return '\u{1F4BB} Learning or Working';
+    if (str.toLowerCase() === 'dnd') return 'DND';
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 

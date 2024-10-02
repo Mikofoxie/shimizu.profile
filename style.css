@@ -91,6 +91,8 @@ header > .pfp-info > img {
     overflow: hidden;
     white-space: nowrap;
     cursor: default;
+    user-select: none;
+    pointer-events: none;
     transition: max-width 0.4s ease, opacity 0.4s ease, margin-left 0.4s ease, padding-right 0.4s ease;
 }
 

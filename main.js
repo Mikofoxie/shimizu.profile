@@ -12,85 +12,116 @@ document.querySelectorAll('img').forEach(img => {
 
 const stateMap = new Map();
 
-function initializeLanyard() {
-    const statusColors = {
+
+const CONFIG = {
+    WS_URL: 'wss://api.lanyard.rest/socket',
+    USER_ID: '684965357609549842',
+    RETRY_TIMEOUT: 1000,
+    SELECTORS: {
+        DOT: '#dot',
+        STATUS: '#status'
+    },
+    STATUS_COLORS: {
         online: '#4b8',
         idle: '#fa1',
         dnd: '#f44',
         offline: '#778'
-    };
+    }
+};
 
-    const ws = new WebSocket('wss://api.lanyard.rest/socket');
+
+function initializeWebSocket() {
+    const ws = new WebSocket(CONFIG.WS_URL);
     
-    ws.addEventListener('open', () => subscribeToUser(ws, '684965357609549842'));
+    ws.addEventListener('open', () => subscribeToUser(ws, CONFIG.USER_ID));
+    ws.addEventListener('message', handleMessage);
     ws.addEventListener('error', handleError);
     ws.addEventListener('close', handleReconnect);
-    ws.addEventListener('message', ({ data }) => handlePresenceUpdate(data, statusColors));
+    
+    return ws;
 }
-
 
 function subscribeToUser(ws, userId) {
-    const subscribeMessage = JSON.stringify({
-        op: 2,
-        d: { subscribe_to_id: userId }
-    });
-    ws.send(subscribeMessage);
+    if (ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({
+            op: 2,
+            d: { subscribe_to_id: userId }
+        }));
+    }
 }
 
 
-function handleError() {
-    console.error('WebSocket encountered an error. Closing connection.');
+function handleMessage({ data }) {
+    try {
+        const parsedData = JSON.parse(data);
+        
+        if (!isValidPresenceData(parsedData)) return;
+        
+        updatePresenceUI(parsedData.d);
+    } catch (error) {
+        console.error('Error processing message:', error);
+    }
+}
+
+function handleError(error) {
+    console.error('WebSocket error:', error);
     this.close();
 }
 
-
 function handleReconnect() {
-    setTimeout(initializeLanyard, 1000); 
+    console.log('Attempting to reconnect...');
+    setTimeout(initializeWebSocket, CONFIG.RETRY_TIMEOUT);
 }
 
 
-function handlePresenceUpdate(data, statusColors) {
-    const { t, d } = JSON.parse(data);
-
-    
-    if (t !== 'INIT_STATE' && t !== 'PRESENCE_UPDATE') return;
-
-    
-    updateElementStyle('#dot', 'backgroundColor', statusColors[d.discord_status]);
-
-   
-    const capitalizedStatus = capitalizeFirstLetter(d.discord_status);
-    updateElementText('#status', capitalizedStatus);
+function isValidPresenceData({ t, d }) {
+    return (t === 'INIT_STATE' || t === 'PRESENCE_UPDATE') && 
+           d && 
+           typeof d.discord_status === 'string';
 }
 
 
-function updateElementText(selector, text) {
-    const element = document.querySelector(selector);
-    if (!element) return;
+function updatePresenceUI(data) {
+    const status = formatStatus(data.discord_status);
+    const color = CONFIG.STATUS_COLORS[data.discord_status];
 
-    
-    if (stateMap.get(selector) !== text) {
-        element.textContent = text;
-        stateMap.set(selector, text); 
-    }
+    updateElementStyle(CONFIG.SELECTORS.DOT, 'backgroundColor', color);
+    updateElementText(CONFIG.SELECTORS.STATUS, status);
 }
-
 
 function updateElementStyle(selector, property, value) {
     const element = document.querySelector(selector);
-    if (!element) return;
+    if (!element || stateMap.get(`${selector}-${property}`) === value) return;
 
-    
-    if (stateMap.get(selector) !== value) {
-        element.style[property] = value;
-        stateMap.set(selector, value);
-    }
+    element.style[property] = value;
+    stateMap.set(`${selector}-${property}`, value);
+}
+
+function updateElementText(selector, text) {
+    const element = document.querySelector(selector);
+    if (!element || stateMap.get(selector) === text) return;
+
+    element.textContent = text;
+    stateMap.set(selector, text);
+}
+
+function formatStatus(status) {
+    return status.toLowerCase() === 'dnd' ? 
+           'DND' : 
+           capitalizeFirstLetter(status);
 }
 
 function capitalizeFirstLetter(str) {
-    if (str.toLowerCase() === 'dnd') return 'DND';
-    return str.charAt(0).toUpperCase() + str.slice(1);
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+function initializeLanyard() {
+    try {
+        initializeWebSocket();
+    } catch (error) {
+        console.error('Failed to initialize Lanyard:', error);
+        setTimeout(initializeLanyard, CONFIG.RETRY_TIMEOUT);
+    }
+}
 
 initializeLanyard();

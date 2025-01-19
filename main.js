@@ -106,9 +106,11 @@ function updateElementText(selector, text) {
 }
 
 function formatStatus(status) {
-    return status.toLowerCase() === 'dnd' ? 
-           'DND' : 
-           capitalizeFirstLetter(status);
+    let setStatus = status.toLowerCase()
+
+    return setStatus === 'dnd' ? 'Busy' : 
+           setStatus === 'idle' ? 'Chilling' : 
+           setStatus === 'online' ? 'Nice day' : capitalizeFirstLetter(status);
 }
 
 function capitalizeFirstLetter(str) {

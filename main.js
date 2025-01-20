@@ -108,13 +108,7 @@ function updateElementText(selector, text) {
 function formatStatus(status) {
     let setStatus = status.toLowerCase()
 
-    return setStatus === 'dnd' ? 'Busy' : 
-           setStatus === 'idle' ? 'Chilling' : 
-           setStatus === 'online' ? 'Nice day' : capitalizeFirstLetter(status);
-}
-
-function capitalizeFirstLetter(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    return setStatus === 'dnd' ? 'Busy' : setStatus === 'idle' ? 'Chilling' : setStatus === 'online' ? 'Nice day' : 'Sleeping'
 }
 
 function initializeLanyard() {

@@ -174,9 +174,9 @@ a {
 }
 
 @media (min-width: 120rem) {
-  header > h1 {
-    font-size: 3.6em;
-  }
+    header > h1 {
+      font-size: 1.6em;
+    }
 
   header > img {
     width: 38em;
@@ -185,11 +185,15 @@ a {
   }
 
   a {
-    font-size: 3em;
+    font-size: 2em;
   }
   ul > li {
-    padding: 2em;
+    padding: 1.4em;
     margin: 1.8em auto;
-    max-width: 980px;
+    max-width: 840px;
+  }
+
+  li > a > img {
+    width: 1.4em;
   }
 }

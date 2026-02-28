@@ -1,59 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Shimizu's profile - Links</title>
-  </head>
 
-  <body>
-    <div id="particles-js"></div>
-    <div class="main">
-      <header>
-        <div class="pfp-info">
-          <img src="./assets/img/Shimizu_pfp.webp" alt="" />
-          <div class="meta">
-            <div class="discord">
-              <span id="dot"></span>
-              <span id="status" class="hidden-status"></span>
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" as="image" href="./assets/img/background.webp" />
+  <link rel="preload" as="image" href="./assets/img/Shimizu_pfp.webp" />
+  <link rel="preconnect" href="https://api.lanyard.rest" crossorigin />
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Shimizu's profile - Links</title>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  <div class="main">
+    <header>
+      <div class="pfp-info">
+        <img src="./assets/img/Shimizu_pfp.webp" alt="" />
+        <div class="meta">
+          <div class="discord">
+            <span id="dot" class="loading"></span>
+            <span id="status" class="hidden-status"></span>
           </div>
         </div>
-        <h1>@Caelith</h1>
-      </header>
-      <ul>
-        <li>
-          <a href="https://x.com/caelithimyc">
-            <img src="./assets/img/x-logo.svg" alt="X" />
-            Twitter
-          </a>
-        </li>
-        <li>
-          <a href="https://www.youtube.com/@caelithimyc">
-            <img src="./assets/img/youtube.svg" alt="Youtube" />
-            Youtube
-          </a>
-        </li>
-        <li>
-          <a href="https://t.me/caelithimyc">
-            <img src="./assets/img/telegram.svg" alt="Telegram" />
-            Telegram
-          </a>
-        </li>
-        <li>
-          <a href="https://discordapp.com/users/684965357609549842">
-            <img src="./assets/img/discord.svg" alt="Discord" />
-            Discord
-          </a>
-        </li>
-      </ul>
-    </div>
+      </div>
+      <h1>@Caelith</h1>
+    </header>
 
-    <script defer src="./assets/particles/particles.js"></script>
-    <script defer src="./assets/particles/app.js"></script>
+    <ul id="links-container"></ul>
+  </div>
 
-    <script src="./main.js"></script>
-  </body>
+  <script defer src="./assets/particles/particles.js"></script>
+  <script defer src="./assets/particles/app.js"></script>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+
 </html>

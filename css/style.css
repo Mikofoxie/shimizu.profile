@@ -43,7 +43,7 @@ body::before {
   width: 100vw;
   height: 100vh;
   min-height: -webkit-fill-available;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: #00000099;
   z-index: -1;
 }
 
@@ -57,8 +57,8 @@ img {
 .main {
   width: 100%;
   position: relative;
-  transition: opacity 2s ease-in-out, filter 2s ease-in-out;
-  will-change: opacity, filter;
+  transition: opacity 2s ease-in-out;
+  will-change: opacity;
 }
 
 #particles-js {
@@ -82,8 +82,8 @@ header>.pfp-info>img {
   width: 14em;
   height: 14em;
   border-radius: 100%;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  box-shadow: rgb(28 32 93 / 28%) 0px 2px 8px 0px;
+  border: 3px solid #ffffffE6;
+  box-shadow: #1c205d47 0px 2px 8px 0px;
   position: relative;
 }
 
@@ -117,7 +117,7 @@ header>.pfp-info>img {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #000000B3;
   padding: 0.5em 0.38em 0.5em 0.46em;
   border-radius: 20px;
   box-sizing: border-box;
@@ -167,11 +167,10 @@ ul {
 }
 
 ul>li {
-  background-color: rgba(255, 255, 255, 0.733);
+  background-color: #ffffffbb;
   backdrop-filter: blur(10px) saturate(160%) contrast(180%);
-  -moz-backdrop-filter: blur(10px) saturate(160%) contrast(180%);
   margin: 1.2em auto;
-  box-shadow: rgb(28 32 93 / 28%) 0px 2px 8px 0px;
+  box-shadow: #1c205d47 0px 2px 8px 0px;
   max-width: 480px;
   border: 1px solid #fff;
   border-radius: 1em;

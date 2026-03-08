@@ -1,6 +1,7 @@
 import { CONFIG } from './config.js';
 
 let ws;
+let retryTimeout = 1000;
 
 export function initializeLanyard() {
     if (ws) return;
@@ -8,6 +9,7 @@ export function initializeLanyard() {
     ws = new WebSocket(CONFIG.LANYARD.WS_URL);
 
     ws.onopen = () => {
+        retryTimeout = 1000;
         ws.send(JSON.stringify({
             op: 2,
             d: { subscribe_to_id: CONFIG.LANYARD.USER_ID }
@@ -25,7 +27,8 @@ export function initializeLanyard() {
 
     ws.onclose = () => {
         ws = null;
-        setTimeout(initializeLanyard, CONFIG.LANYARD.RETRY_TIMEOUT);
+        setTimeout(initializeLanyard, retryTimeout);
+        retryTimeout = Math.min(retryTimeout * 1.5, 30000);
     };
 }
 
@@ -37,10 +40,13 @@ function updateUI(status) {
 
     elDot.classList.remove('loading');
 
-    const label = status === 'dnd' ? 'Busy'
-        : status === 'idle' ? 'Chilling'
-            : status === 'online' ? 'Nice day'
-                : 'Sleeping';
+    const LABELS = {
+        dnd: 'Busy',
+        idle: 'Chilling',
+        online: 'Nice day',
+        offline: 'Sleeping'
+    };
+    const label = LABELS[status] || LABELS.offline;
 
     elDot.style.backgroundColor = CONFIG.LANYARD.STATUS_COLORS[status] || CONFIG.LANYARD.STATUS_COLORS.offline;
     elStatus.textContent = label;

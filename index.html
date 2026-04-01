@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preload" as="image" href="./assets/img/background.webp" />
+  <link rel="preload" as="image" href="./assets/img/Shimizu_pfp.webp" />
+  <link rel="preconnect" href="https://api.lanyard.rest" crossorigin />
+  <link rel="modulepreload" href="./js/main.js" />
+  <link rel="modulepreload" href="./js/config.js" />
+  <link rel="modulepreload" href="./js/discord-presence.js" />
+  <link rel="icon" href="./assets/img/favicon.ico" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <title>Shimizu's profile - Links</title>
+</head>
+
+<body>
+  <div id="particles-js"></div>
+  <div class="main">
+    <header>
+      <div class="pfp-info">
+        <img src="./assets/img/Shimizu_pfp.webp" alt="Shimizu profile picture" width="224" height="224" />
+        <div class="meta">
+          <div class="discord">
+            <span id="dot" class="loading"></span>
+            <span id="status" class="hidden-status"></span>
+          </div>
+        </div>
+      </div>
+      <h1>@Caelith</h1>
+    </header>
+
+    <ul id="links-container"></ul>
+  </div>
+
+  <script defer src="./js/particles.js"></script>
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

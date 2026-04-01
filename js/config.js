@@ -16,25 +16,3 @@ export const CONFIG = {
     }
 };
 
-export const PROFILE_LINKS = [
-    {
-        name: "Twitter",
-        url: "https://x.com/caelithimyc",
-        icon: "./assets/img/x-logo.svg"
-    },
-    {
-        name: "Youtube",
-        url: "https://www.youtube.com/@caelithimyc",
-        icon: "./assets/img/youtube.svg"
-    },
-    {
-        name: "Telegram",
-        url: "https://t.me/caelithimyc",
-        icon: "./assets/img/telegram.svg"
-    },
-    {
-        name: "Discord",
-        url: "https://discordapp.com/users/684965357609549842",
-        icon: "./assets/img/discord.svg"
-    }
-];

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shimizu's official profile and links." />
+  <meta property="og:title" content="Shimizu's Profile" />
+  <meta property="og:description" content="Connect with Shimizu across all platforms." />
+  <meta property="og:image" content="./assets/img/agurannju.webp" />
+  <meta name="theme-color" content="#050505" />
+  <link rel="preload" as="image" href="./assets/img/Shimizu_pfp_224.webp" imagesrcset="./assets/img/Shimizu_pfp_224.webp 1x, ./assets/img/Shimizu_pfp.webp 2x" fetchpriority="high" />
+  <link rel="preconnect" href="https://api.lanyard.rest" crossorigin />
+  <link rel="modulepreload" href="./js/main.js" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/img/favicon.ico" />
+  <style>
+html {
+  background-color: #050505;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  color: #fff;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 2em 0;
+  box-sizing: border-box;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: -webkit-fill-available;
+  background: url("./assets/img/background.webp") no-repeat center center;
+  background-size: cover;
+  z-index: -2;
+  opacity: 0;
+  will-change: transform;
+  animation: darkReveal 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, droneDrift 60s 3s linear infinite;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  min-height: -webkit-fill-available;
+  background-color: #00000099;
+  z-index: -1;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+
+}
+
+.main {
+  width: 100%;
+  position: relative;
+  transition: opacity 2s ease-in-out;
+}
+
+header {
+  padding-top: 3em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header>.pfp-info>img {
+  width: clamp(12rem, 10rem + 4vw, 16rem);
+  height: clamp(12rem, 10rem + 4vw, 16rem);
+  object-fit: cover;
+  border-radius: 100%;
+  border: 3px solid #ffffffE6;
+  box-shadow: #1c205d47 0px 2px 8px 0px;
+  position: relative;
+}
+
+#dot {
+  display: inline-block;
+  margin-right: 0.1em;
+  border-radius: 50%;
+  width: 1.4em;
+  height: 1.4em;
+  flex-shrink: 0;
+}
+
+#dot.loading {
+  background-color: #f1c40f;
+  animation: pulse 0.8s ease-in-out infinite alternate;
+}
+
+.pfp-info {
+  position: relative;
+  animation: slideUp 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.pfp-loading {
+  animation: pfpSkeleton 1.2s infinite alternate ease-in-out;
+}
+
+.meta {
+  position: absolute;
+  bottom: 5%;
+  left: 73%;
+  contain: layout paint;
+  z-index: 10;
+}
+
+.discord {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000B3;
+  padding: 0.5em 0.38em 0.5em 0.46em;
+  border-radius: 20px;
+  box-sizing: border-box;
+  transition: padding 0.3s ease;
+  transform: translateZ(0);
+  will-change: padding;
+}
+
+#status {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+  transition: max-width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease, margin-left 0.4s ease,
+    padding-right 0.4s ease;
+  will-change: max-width, opacity, margin-left, padding-right;
+}
+
+.discord:hover #status {
+  max-width: 220px;
+  opacity: 1;
+  margin-left: 0.2em;
+  padding-right: 0.3rem;
+}
+
+header>h1 {
+  display: inline-block;
+  font-size: clamp(1.3rem, 1rem + 1vw, 1.6rem);
+  font-weight: bold;
+  border-radius: 1em;
+  background-color: #000a;
+  color: #fff;
+  padding: 0.3em 0.6em;
+  opacity: 0;
+  animation: fadeUp 0.8s 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+ul {
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0.8em 0.64em 0.6em 0.68em;
+}
+
+ul>li {
+  margin: clamp(1.2rem, 1vw + 1rem, 1.8rem) auto;
+  width: 90%;
+  max-width: clamp(360px, 50vw, 640px);
+  opacity: 0;
+  pointer-events: none;
+  animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+ul>li:nth-child(1) { animation-delay: 1.2s; }
+ul>li:nth-child(2) { animation-delay: 1.35s; }
+ul>li:nth-child(3) { animation-delay: 1.5s; }
+ul>li:nth-child(4) { animation-delay: 1.65s; }
+
+ul>li>a {
+  background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), inset 0 2px 0 rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 1.2em;
+  padding: clamp(0.8rem, 0.5rem + 1vw, 1.4rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8em;
+  color: #000;
+  text-decoration: none;
+  font-size: clamp(1.2rem, 1rem + 0.5vw, 1.5rem);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+ul>li>a:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 1);
+}
+
+ul>li>a:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 2px 0 rgba(255, 255, 255, 1) !important;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+ul>li>a:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+li>a>img {
+  width: clamp(1.4rem, 1rem + 1vw, 2rem);
+  transition: transform 0.3s ease;
+}
+
+ul>li>a:hover img {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20%) scale(1.05);
+  }
+
+  50% {
+    transform: translateY(20%) scale(1.05);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.bubbles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+.bubbles li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  background: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 40%), rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.15), 0 0 10px rgba(255, 255, 255, 0.05);
+  contain: strict;
+  border-radius: 50%;
+  bottom: -150px;
+  animation: bubbleRise 20s infinite ease-in-out;
+  will-change: transform, opacity;
+}
+
+.bubbles.paused li {
+  animation-play-state: paused;
+}
+
+.bubbles li:nth-child(1) { left: 10%; width: 40px; height: 40px; animation-duration: 18s; animation-delay: 0s; }
+.bubbles li:nth-child(2) { left: 20%; width: 20px; height: 20px; animation-duration: 22s; animation-delay: 2s; }
+.bubbles li:nth-child(3) { left: 35%; width: 50px; height: 50px; animation-duration: 15s; animation-delay: 4s; }
+.bubbles li:nth-child(4) { left: 50%; width: 30px; height: 30px; animation-duration: 25s; animation-delay: 0s; }
+.bubbles li:nth-child(5) { left: 65%; width: 25px; height: 25px; animation-duration: 20s; animation-delay: 3s; }
+.bubbles li:nth-child(6) { left: 75%; width: 60px; height: 60px; animation-duration: 24s; animation-delay: 7s; }
+.bubbles li:nth-child(7) { left: 85%; width: 35px; height: 35px; animation-duration: 19s; animation-delay: 1s; }
+
+@keyframes bubbleRise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  20% { opacity: 1; transform: translate3d(25px, -20vh, 0) scale(0.9); }
+  40% { transform: translate3d(-20px, -40vh, 0) scale(1); }
+  60% { transform: translate3d(20px, -60vh, 0) scale(1.1); }
+  80% { opacity: 1; transform: translate3d(-15px, -80vh, 0) scale(1.15); }
+  100% {
+    transform: translate3d(15px, -120vh, 0) scale(1.2);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    filter: blur(8px);
+    pointer-events: none;
+  }
+  99% {
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    pointer-events: auto;
+  }
+}
+
+@keyframes pfpSkeleton {
+  0% {
+    background-color: #ffffff1a;
+  }
+  100% {
+    background-color: #ffffff4d;
+  }
+}
+
+@keyframes darkReveal {
+  0% {
+    opacity: 0;
+    filter: blur(20px);
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1.15);
+  }
+}
+
+@keyframes droneDrift {
+  0% { transform: scale(1.15) translate3d(0, 0, 0) rotate(0deg); }
+  25% { transform: scale(1.15) translate3d(-1.5%, 1%, 0) rotate(-0.5deg); }
+  50% { transform: scale(1.15) translate3d(0, 2%, 0) rotate(0deg); }
+  75% { transform: scale(1.15) translate3d(1.5%, 1%, 0) rotate(0.5deg); }
+  100% { transform: scale(1.15) translate3d(0, 0, 0) rotate(0deg); }
+}
+
+@media (hover: none) {
+  body::after {
+    animation: darkReveal 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    will-change: auto;
+  }
+
+  #status {
+    max-width: 220px;
+    opacity: 1;
+    margin-left: 0.2em;
+    padding-right: 0.3rem;
+  }
+
+  .bubbles li:nth-child(n+5) {
+    display: none;
+  }
+
+  .bubbles li {
+    box-shadow: none;
+  }
+}
+
+  </style>
+  <title>Shimizu's profile - Links</title>
+</head>
+
+<body>
+  <ul class="bubbles" aria-hidden="true">
+    <li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+  <main class="main">
+    <header>
+      <div class="pfp-info">
+        <img id="pfp" class="pfp-loading" src="./assets/img/Shimizu_pfp_224.webp" srcset="./assets/img/Shimizu_pfp_224.webp 1x, ./assets/img/Shimizu_pfp.webp 2x" fetchpriority="high" width="224" height="224" />
+        <div class="meta">
+          <div class="discord">
+            <span id="dot" class="loading"></span>
+            <span id="status"></span>
+          </div>
+        </div>
+      </div>
+      <h1>@Caelith</h1>
+    </header>
+
+    <ul id="links-container">
+      <li><a href="https://x.com/caelithimyc"><img src="./assets/img/x-logo.svg" alt="Twitter" width="32" height="32" /> Twitter</a></li>
+      <li><a href="https://www.youtube.com/@caelithimyc"><img src="./assets/img/youtube.svg" alt="Youtube" width="32" height="32" /> Youtube</a></li>
+      <li><a href="https://t.me/caelithimyc"><img src="./assets/img/telegram.svg" alt="Telegram" width="32" height="32" /> Telegram</a></li>
+      <li><a href="https://discordapp.com/users/684965357609549842"><img src="./assets/img/discord.svg" alt="Discord" width="32" height="32" /> Discord</a></li>
+    </ul>
+  </main>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>
